@@ -8,7 +8,7 @@ export default {
   theme: {
   	extend: {
 		fontFamily: {
-		cinzel: ['"Cinzel Decorative"', 'serif'],
+		cinzel: ['Cinzel Decorative', 'serif'],
         poppins: ['Poppins', 'sans-serif'],
       },
   		borderRadius: {
