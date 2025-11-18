@@ -15,24 +15,31 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-50 shadow-sm relative">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        {/* Logo */}
-        <img src={assets.logo} alt="Logo" className="h-10 w-auto px-4" />
+        
+    {/* Logo + Brand Name */}
+    <div className="flex items-center space-x-3">
+      <img src={assets.logo} alt="Logo" className="h-10 w-auto" />
+      <span className="font-cinzel text-base md:text-lg lg:text-xl text-gray-700 font-medium flex flex-col leading-tight">
+         Vigo Decors
+      </span>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
-          <li
-            onClick={() => scrollToSection("footer")}
-            className="hover:text-blue-600 cursor-pointer"
-          >
-            About
-          </li>
-          <li
-            onClick={() => scrollToSection("why")}
-            className="hover:text-blue-600 cursor-pointer"
-          >
-            Contact
-          </li>
-        </ul>
+    </div>
+
+    {/* Desktop Links */}
+    <ul className="hidden md:flex space-x-8 text-gray-700 font-medium">
+      <li
+        onClick={() => scrollToSection("footer")}
+        className="hover:text-blue-600 cursor-pointer"
+      >
+        About
+      </li>
+      <li
+        onClick={() => scrollToSection("why")}
+        className="hover:text-blue-600 cursor-pointer"
+      >
+        Contact
+      </li>
+    </ul>
 
         {/* Mobile Menu Icon */}
         <img

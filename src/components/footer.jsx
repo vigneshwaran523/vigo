@@ -12,6 +12,13 @@ const Footer = () => {
   const [successPopup, setSuccessPopup] = useState(false);
   const [error, setError] = useState("");
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const handleSubscribe = async (e) => {
     e.preventDefault();
     setError("");
@@ -55,8 +62,13 @@ const Footer = () => {
     id="footer" 
      className="bg-black text-gray-300 relative" aria-label="Footer">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <img src={assets.logo} alt="" />
+        <div >
+          <div className="flex items-center space-x-3">
+          <img src={assets.logo} alt="" className="h-12 w-auto" />
+          <span className="font-cinzel text-base md:text-lg lg:text-xl text-white font-medium flex flex-col leading-tight">
+         Vigo Decors
+      </span>
+      </div>
 
           <p className="mb-4 text-sm">
             Stay updated with our latest designs and promotions
@@ -101,10 +113,13 @@ const Footer = () => {
     <div>
       <h3 className="text-white font-semibold mb-3">Services</h3>
       <ul className="space-y-2 text-sm">
-        <li><a href="#" className="hover:underline">About us</a></li>
+        <li >
+        <a onClick={() => scrollToSection("why")}
+          className="hover:text-blue-600 cursor-pointer">About us</a></li>
         
         
-        <li><a href="#" className="hover:underline">Contact</a></li>
+        <li><a onClick={() => scrollToSection("why")}
+          className="hover:text-blue-600 cursor-pointer">Contact</a></li>
         
       </ul>
     </div>

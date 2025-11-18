@@ -29,7 +29,7 @@ const Details = () => {
           <div className="mb-4 text-3xl text-black flex justify-center">
             <GiTheaterCurtains size={40} />
           </div>
-          <h4 className="font-semibold text-xl mb-2 text-black">Custom curtains</h4>
+          <h4 className="font-semibold text-xl mb-2 text-black">Custom curtains and Blinds</h4>
           <p className="text-xs text-black/70 max-w-xs mx-auto">
             Tailored designs that fit your windows perfectly.
           </p>

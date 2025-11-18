@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+		cinzel: ['"Cinzel Decorative"', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
