@@ -1,4 +1,3 @@
-// src/components/Hero.jsx
 import React, { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -10,45 +9,51 @@ const Hero = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
-  const [slide, setSlide] = useState(false);
+  const [slideImage, setSlideImage] = useState(null); // this one slides
+  const [isSliding, setIsSliding] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlide(true); // start slide animation
+      const next = (currentIndex + 1) % images.length;
+
+      // set the sliding image
+      setSlideImage(images[next]);
+      setIsSliding(true);
 
       setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setNextIndex((nextIndex + 1) % images.length);
-        setSlide(false); // reset animation
-      }, 800); // duration match
+        // update current image after slide finishes
+        setCurrentIndex(next);
+        setIsSliding(false);
+        setSlideImage(null); // remove sliding layer
+      }, 900);
+
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [nextIndex]);
+  }, [currentIndex]);
 
   return (
     <section id="hero" className="relative h-[90vh] w-full overflow-hidden">
 
-      {/* Current Image */}
+      {/* FIXED (Current Image) — NEVER MOVES */}
       <div
-        className={`absolute inset-0 bg-cover bg-center
-          transition-all duration-800ms ease-in-out
-          
-        `}
+        className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
       ></div>
 
-      {/* Next Image (comes from right side) */}
-      <div
-        className={`absolute inset-0 bg-cover bg-center
-          transition-all duration-[800ms] ease-in-out
-          
-        `}
-        style={{ backgroundImage: `url(${images[nextIndex]})` }}
-      ></div>
+      {/* SLIDING IMAGE — ONLY THIS MOVES */}
+      {slideImage && (
+        <div
+          className={`
+            absolute inset-0 bg-cover bg-center
+            transition-transform duration-900ms ease-in-out
+            ${isSliding ? "translate-x-0" : "translate-x-full"}
+          `}
+          style={{ backgroundImage: `url(${slideImage})` }}
+        ></div>
+      )}
 
-      {/* Content */}
+      {/* CONTENT */}
       <div className="relative z-10 h-full px-8 md:px-20 flex items-center">
         <h1 className="text-4xl md:text-6xl font-normal leading-snug max-w-lg text-black font-serif">
           Elegant curtains <br />
