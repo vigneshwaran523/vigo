@@ -25,7 +25,7 @@ const Hero = () => {
         setCurrentIndex(next);
         setIsSliding(false);
         setSlideImage(null); // remove sliding layer
-      }, 900);
+      }, 3000);
 
     }, 4000);
 
@@ -46,7 +46,7 @@ const Hero = () => {
         <div
           className={`
             absolute inset-0 bg-cover bg-center
-            transition-transform duration-900ms ease-in-out
+            transition-transform duration-3000ms ease-[cubic-bezier\(0.25,0.1,0.25,1\)]
             ${isSliding ? "translate-x-0" : "translate-x-full"}
           `}
           style={{ backgroundImage: `url(${slideImage})` }}
