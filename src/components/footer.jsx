@@ -12,6 +12,7 @@ const Footer = () => {
   const [successPopup, setSuccessPopup] = useState(false);
   const [error, setError] = useState("");
 
+  
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {

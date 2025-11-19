@@ -1,55 +1,65 @@
+
 // src/components/Hero.jsx
 import React, { useEffect, useState } from "react";
-import { assets } from "../assets/assets";
 
 const Hero = () => {
   const images = [
     "https://i.pinimg.com/1200x/bc/2a/68/bc2a6816842a2cd5c9dbe0224cb8650a.jpg",
     "https://cdn.mos.cms.futurecdn.net/mphQCH7K6qpdLZcMpovcz4-1920-80.jpg",
     "https://www.housedigest.com/img/gallery/these-are-the-best-bedroom-curtain-colors/l-intro-1683840278.jpg",
-    "https://tse3.mm.bing.net/th/id/OIP.1gtXpTkKDlx3XmBUGRWm6QHaFF?cb=12ucfimg=1&w=1213&h=832&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "https://tse3.mm.bing.net/th/id/OIP.1gtXpTkKDlx3XmBUGRWm6QHaFF",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [slide, setSlide] = useState(false);
 
-  // Auto-change image every 5 seconds
+  // Sliding transition
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [images.length]);
+      setSlide(true); // start slide animation
 
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+      setTimeout(() => {
+        setCurrentIndex(nextIndex);
+        setNextIndex((nextIndex + 1) % images.length);
+      }, 6000); // matches duration-600
+
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [nextIndex]);
 
   return (
-    <section
-      id="hero"
-      className="relative h-[90vh] w-full bg-cover bg-center transition-all duration-100 ease-in-out"
-      style={{ backgroundImage: `url(${images[currentIndex]})` }}
-    >
-      {/* Optional gradient overlay */}
-      {/* <div className="absolute inset-0 bg-gradient-to-r from-yellow-900/80 to-black/75"></div> */}
+    <section id="hero" className="relative h-[90vh] w-full overflow-hidden">
+      
+      {/* Current Image */}
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-transform duration-600 ease-in-out ${
+          slide ? "-translate-x-full" : "translate-x-0"
+        }`}
+        style={{ backgroundImage: `url(${images[currentIndex]})` }}
+      ></div>
 
-      {/* Content container */}
+      {/* Next Image */}
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-transform duration-600 ease-in-out ${
+          slide ? "translate-x-0" : "translate-x-full"
+        }`}
+        style={{ backgroundImage: `url(${images[nextIndex]})` }}
+      ></div>
+
+      {/* Content */}
       <div className="relative z-10 h-full px-8 md:px-20 flex items-center">
-        {/* Left side heading */}
         <h1 className="text-4xl md:text-6xl font-normal leading-snug max-w-lg text-black font-serif">
           Elegant curtains <br />
           and <span className="font-semibold">blinds</span> for <br />
           your home
         </h1>
 
-        {/* Right bottom content */}
         <div className="absolute right-8 bottom-8 max-w-lg text-right text-black font-serif">
           <p className="text-xs md:text-sm mb-4 max-w-xs">
-            Transform your space with precision crafted <br /> window treatments. We
-            deliver simple, clean designs that speak volumes.
+            Transform your space with precision crafted <br /> window treatments.
+            We deliver simple, clean designs that speak volumes.
           </p>
 
           <div className="flex justify-end gap-4">
@@ -63,7 +73,7 @@ const Hero = () => {
               </button>
             </a>
             <button
-              onClick={() => scrollToSection("why")}
+              onClick={() => document.getElementById("why")?.scrollIntoView({ behavior: "smooth" })}
               className="bg-yellow-900 bg-opacity-80 text-black px-6 py-2 rounded shadow hover:bg-yellow-900/95 transition"
             >
               Learn more
