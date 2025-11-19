@@ -1,4 +1,3 @@
-
 // src/components/Hero.jsx
 import React, { useEffect, useState } from "react";
 
@@ -14,7 +13,6 @@ const Hero = () => {
   const [nextIndex, setNextIndex] = useState(1);
   const [slide, setSlide] = useState(false);
 
-  // Sliding transition
   useEffect(() => {
     const interval = setInterval(() => {
       setSlide(true); // start slide animation
@@ -22,8 +20,8 @@ const Hero = () => {
       setTimeout(() => {
         setCurrentIndex(nextIndex);
         setNextIndex((nextIndex + 1) % images.length);
-      }, 6000); // matches duration-600
-
+        setSlide(false); // reset animation
+      }, 800); // duration match
     }, 4000);
 
     return () => clearInterval(interval);
@@ -31,20 +29,22 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative h-[90vh] w-full overflow-hidden">
-      
+
       {/* Current Image */}
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-transform duration-600 ease-in-out ${
-          slide ? "-translate-x-full" : "translate-x-0"
-        }`}
+        className={`absolute inset-0 bg-cover bg-center
+          transition-all duration-800ms ease-in-out
+          
+        `}
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
       ></div>
 
-      {/* Next Image */}
+      {/* Next Image (comes from right side) */}
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-transform duration-600 ease-in-out ${
-          slide ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`absolute inset-0 bg-cover bg-center
+          transition-all duration-[800ms] ease-in-out
+          
+        `}
         style={{ backgroundImage: `url(${images[nextIndex]})` }}
       ></div>
 
@@ -72,8 +72,11 @@ const Hero = () => {
                 Book Now
               </button>
             </a>
+
             <button
-              onClick={() => document.getElementById("why")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document.getElementById("why")?.scrollIntoView({ behavior: "smooth" })
+              }
               className="bg-yellow-900 bg-opacity-80 text-black px-6 py-2 rounded shadow hover:bg-yellow-900/95 transition"
             >
               Learn more
